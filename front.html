@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .add-task-container {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    .add-task-container input {
+      flex-grow: 1;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .add-task-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .task-list {
+      list-style: none;
+      padding: 0;
+    }
+    .task-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+    }
+    .task-item span {
+      flex-grow: 1;
+    }
+    .edit-task-button {
+      margin-left: 10px;
+      padding: 5px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: #007bff;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>To-Do App</h1>
+  <div class="add-task-container">
+    <input type="text" placeholder="Enter task" id="newTaskInput">
+    <button class="add-task-button" onclick="createTask()">Add Task</button>
+  </div>
+  <ul class="task-list" id="taskList">
+  </ul>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      fetchTasks();
+    });
+
+    function fetchTasks() {
+      var taskList = document.getElementById("taskList");
+      taskList.innerHTML = '';
+
+      fetch('http://localhost:3010/tasks')
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(task => {
+            var taskItem = document.createElement('li');
+            taskItem.className = "task-item";
+            taskItem.innerHTML = `
+              <span>${task.task_name}</span>
+              <div>
+                <button class="edit-task-button" onclick="editTask('${task.id}', '${task.task_name}')">&#9998;</button>
+                <button class="edit-task-button" onclick="deleteTask('${task.id}')">&#128465;</button>
+              </div>
+            `;
+            taskList.appendChild(taskItem);
+          });
+        })
+        .catch(error => {
+          console.log('Error fetching tasks:', error);
+        });
+    }
+
+    function createTask() {
+      var newTaskInput = document.getElementById("newTaskInput");
+      var newTaskName = newTaskInput.value.trim();
+      if (newTaskName === '') {
+        return;
+      }
+
+      fetch('http://localhost:3010/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ taskName: newTaskName })
+      })
+        .then(() => {
+          newTaskInput.value = '';
+          fetchTasks();
+        })
+        .catch(error => {
+          console.log('Error creating task:', error);
+        });
+    }
+
+    function editTask(taskId, taskName) {
+      var newTaskName = prompt('Enter the new task name:', taskName);
+      if (newTaskName=== null || newTaskName.trim() === '') {
+        return;
+      }
+
+      fetch(`http://localhost:3010/tasks/${taskId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ taskName: newTaskName })
+      })
+        .then(() => {
+          fetchTasks();
+        })
+        .catch(error => {
+          console.log('Error editing task:', error);
+        });
+    }
+
+    function deleteTask(taskId) {
+      if (!confirm("Are you sure you want to delete this task?")) {
+        return;
+      }
+
+      fetch(`http://localhost:3010/tasks/${taskId}`, {
+        method: 'DELETE'
+      })
+        .then(() => {
+          fetchTasks();
+        })
+        .catch(error => {
+          console.log('Error deleting task:', error);
+        });
+    }
+  </script>
+</body>
+</html>
