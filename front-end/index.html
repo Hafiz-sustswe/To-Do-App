@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo App</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo App</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+  <div class="container">
     <div id="signup-form">
       <h1>Sign Up</h1>
       <form id="signup" onsubmit="signup(event)">
@@ -33,7 +34,7 @@
       </form>
     </div>
 
-    <div id="login-form" style="display: none">
+    <div id="login-form" class="hidden">
       <h1>Login</h1>
       <form id="login" onsubmit="login(event)">
         <label for="loginPhoneNumber">Phone Number:</label>
@@ -49,7 +50,7 @@
       </form>
     </div>
 
-    <div id="todo-list" style="display: none">
+    <div id="todo-list" class="hidden">
       <h1>Todo List</h1>
       <form id="create-todo" onsubmit="createTodo(event)">
         <label for="title">Title:</label>
@@ -65,7 +66,8 @@
         <!-- Todo items will be dynamically added here -->
       </ul>
     </div>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
