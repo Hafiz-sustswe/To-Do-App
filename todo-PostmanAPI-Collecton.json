@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "4726552c-577f-4349-bd14-064845e6120f",
+		"name": "todo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23472169"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Emily Brown\",\r\n    \"gender\": \"female\",\r\n    \"designation\": \"Marketing Specialist\",\r\n    \"phoneNumber\": \"1111211111\",\r\n    \"password\": \"password456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/v1/auth/signup",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phoneNumber\": \"9876543210\",\r\n    \"password\": \"securepass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/v1/auth/login",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "todos",
+			"item": [
+				{
+					"name": "create todo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiJKb2huIERvZSIsInBob25lbnVtYmVyIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTY4ODkzNDc4NiwiZXhwIjoxNjg5MDIxMTg2fQ.qq33seeu2LlQiC2O1jscZs1RFIB8u6_bDRQDFUT8fUE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"new todo \",\r\n  \"description\": \"project proposal document by the end of the week.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/v1/todos",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all todos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiJKb2huIERvZSIsInBob25lbnVtYmVyIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTY4ODkzNDc4NiwiZXhwIjoxNjg5MDIxMTg2fQ.qq33seeu2LlQiC2O1jscZs1RFIB8u6_bDRQDFUT8fUE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/v1/todos",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update todo",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiJKb2huIERvZSIsInBob25lbnVtYmVyIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTY4ODkzNDc4NiwiZXhwIjoxNjg5MDIxMTg2fQ.qq33seeu2LlQiC2O1jscZs1RFIB8u6_bDRQDFUT8fUE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"title\": \"Complete Project FOR ME\"\r\n    // \"description\": \"Write and finalize the project proposal document by the end of the week.\",\r\n    \"is_done\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/api/v1/todos/14",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"todos",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete todo",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiJKb2huIERvZSIsInBob25lbnVtYmVyIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTY4ODkzNDc4NiwiZXhwIjoxNjg5MDIxMTg2fQ.qq33seeu2LlQiC2O1jscZs1RFIB8u6_bDRQDFUT8fUE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localhost}}/api/v1/todos/14",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"todos",
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
