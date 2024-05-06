@@ -10,3 +10,5 @@
 This is Part of SWE-330 (WEB Technologies) Project of SWE, SUST.
 The Primary Idea behind to develop a TO-Do Website to get hands on knowledge on  CRUD (Create ,Read, Update,Delete) operations.
 
+Live Demo Presentation link : https://drive.google.com/drive/u/1/folders/1CWSk2H9PtrNOAJ1qeKgcNcOfYNQEtvSE
+
